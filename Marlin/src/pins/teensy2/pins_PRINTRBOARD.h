@@ -70,6 +70,11 @@
 #define DISABLE_JTAG
 
 //
+// Servos
+//
+#define SERVO0_PIN                             3  // D3 EXP1 Pin 7
+
+//
 // Limit Switches
 //
 #define X_STOP_PIN                            47  // E3
@@ -98,8 +103,8 @@
 //
 // Temperature Sensors
 //
-#define TEMP_0_PIN                             1  // Analog Input
-#define TEMP_BED_PIN                           0  // Analog Input
+#define TEMP_0_PIN                            38  // F0
+#define TEMP_BED_PIN                          39  // F1
 
 //
 // Heaters / Fans
