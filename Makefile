@@ -50,3 +50,7 @@ tests-all-local-docker:
 setup-local-docker:
 	docker-compose build
 .PHONY: setup-local-docker
+
+flash:
+	dfu-programmer at90usb1286 erase
+	dfu-programmer at90usb1286 flash ./.pio/build/at90usb1286_dfu/firmware.hex
