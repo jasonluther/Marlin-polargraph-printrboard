@@ -56,6 +56,9 @@ Following the instructions at <https://www.marginallyclever.com/2021/10/friday-f
        `#define Y_MAX_POS (Y_BED_SIZE/2)`
        `#define Z_MAX_POS 0`
     * Disable `MIN_SOFTWARE_ENDSTOPS`
+    * Enable `BED_CENTER_AT_0_0`
+    * Set `MANUAL_X_HOME_POS` to `0`
+    * `MANUAL_Y_HOME_POS` was set above based on belt length and bed width
 
 
 * [Marlin/Configuration_adv.h](./Marlin/Configuration_adv.h):
