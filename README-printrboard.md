@@ -27,11 +27,11 @@ Following the instructions at <https://www.marginallyclever.com/2021/10/friday-f
 * Marlin/Configuration.h
   * Comment out `SHOW_BOOTSCREEN` because we don't have a display
   * Set `MOTHERBOARD` to `BOARD_PRINTRBOARD`
-  * Set `POLARGRAPH_MAX_BELT_LEN` to `940.0`
+  * Set `POLARGRAPH_MAX_BELT_LEN` to `890.0`, measured from the pulley to the pen when the belt is at its longest (when the limit switches are triggered)
   * In `@section endstops`, set `USE_XMAX_PLUG`, `USE_YMAX_PLUG`, and `USE_ZMAX_PLUG` because our limit switches determine when the gondola is at the maximum X and Y values. Later, set direction of endstops when homing:
     `#define X_HOME_DIR 1`
     `#define Y_HOME_DIR 1`
-  * Set `DEFAULT_AXIS_STEPS_PER_UNIT` to `{ 60, 60, 60 }`. It has three values because we don't have an extruder, and 60 might be the correct value, but we'll see. 
+  * Set `DEFAULT_AXIS_STEPS_PER_UNIT` to `{ 46, 46, 46 }`. It has three values because we don't have an extruder. The actual value is calculated using values from the motor, driver, and pulley.
   * Set `DEFAULT_MAX_FEEDRATE` to `{ 2000, 2000, 2000 }`. Again, use three values because we don't have an extruder, and guess at some reasonable values. 
   * Set `DEFAULT_MAX_ACCELERATION` to `{ 2000, 2000, 2000 }`Again, use three values because we don't have an extruder, and guess at some reasonable values. 
   * Based on my motor and board wiring:
@@ -41,7 +41,8 @@ Following the instructions at <https://www.marginallyclever.com/2021/10/friday-f
     `#define X_BED_SIZE 620`
     `#define Y_BED_SIZE 760`
   * Home position: 
-    `#define MANUAL_Y_HOME_POS -549.77 //(Y_MAX_POS-( sqrt(sq(POLARGRAPH_MAX_BELT_LEN)-sq(X_BED_SIZE/2))))`
+    `#define MANUAL_Y_HOME_POS -394.53 //(Y_MAX_POS-( sqrt(sq(POLARGRAPH_MAX_BELT_LEN)-sq(X_BED_SIZE/2))))`  
+    The value is calculated manually because X_BED_SIZE^2 causes an integer overflow error.
   * Enable `NUM_SERVOS` and set to `1`, enable `DEACTIVATE_SERVOS_AFTER_MOVE`
   * Enable `EEPROM_SETTINGS` to save changes to configuration on the machine
   * Settings related to polar machines generally: 

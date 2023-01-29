@@ -878,7 +878,7 @@
 // Enable for Polargraph Kinematics
 #define POLARGRAPH
 #if ENABLED(POLARGRAPH)
-  #define POLARGRAPH_MAX_BELT_LEN 940.0
+  #define POLARGRAPH_MAX_BELT_LEN 890.0
   #define DEFAULT_SEGMENTS_PER_SECOND 5
 #endif
 
@@ -1221,7 +1221,7 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 60, 60, 60 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 46, 46, 46 }
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
@@ -2127,7 +2127,7 @@
 // Manually set the home position. Leave these undefined for automatic settings.
 // For DELTA this is the top-center of the Cartesian print volume.
 #define MANUAL_X_HOME_POS 0
-#define MANUAL_Y_HOME_POS -549.77 //(Y_MAX_POS-( sqrt(sq(POLARGRAPH_MAX_BELT_LEN)-sq(X_BED_SIZE/2))))
+#define MANUAL_Y_HOME_POS -394.53 //(Y_MAX_POS-( sqrt((POLARGRAPH_MAX_BELT_LEN * POLARGRAPH_MAX_BELT_LEN)-(X_BED_SIZE * X_BED_SIZE/2.0))))
 //#define MANUAL_Z_HOME_POS 0
 //#define MANUAL_I_HOME_POS 0
 //#define MANUAL_J_HOME_POS 0
