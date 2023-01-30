@@ -38,10 +38,15 @@ Following the instructions at <https://www.marginallyclever.com/2021/10/friday-f
     `#define INVERT_X_DIR false`
     `#define INVERT_Y_DIR true`
   * Printable area:
-    `#define X_BED_SIZE 620`
-    `#define Y_BED_SIZE 760`
+    `#define X_BED_SIZE 620.0`
+    `#define Y_BED_SIZE 760.0`
   * Home position: 
-    `#define MANUAL_Y_HOME_POS -394.53 //(Y_MAX_POS-( sqrt(sq(POLARGRAPH_MAX_BELT_LEN)-sq(X_BED_SIZE/2))))`  
+    * Enable `BED_CENTER_AT_0_0`. 
+    * Set `MANUAL_X_HOME_POS` to `0`, which puts X=0 centered between the motors. 
+    * `MANUAL_Y_HOME_POS` is calculated using the method described at <https://www.marginallyclever.com/2021/10/friday-facts-4-how-to-marlin-polargraph/>, which uses the Pythagorean theorem with a triangle formed by the belt and half of the bed size. That means the pen must be within the bed area in the home position! 
+    `#define MANUAL_Y_HOME_POS (Y_MAX_POS-( sqrt(sq(POLARGRAPH_MAX_BELT_LEN)-sq(X_BED_SIZE/2))))`  
+    * Note that I've used floating point values in this formula so that I don't have to manually recalculate it if I adjust machine sizes. I haven't checked to see whether it's a performance problem if something is being forced to use floating point math instead of integer math. 
+    * With the bed size configured this way, it's easy to move the gondola to bad positions or to send one of the gondola arms into the motor pulley. 
     The value is calculated manually because X_BED_SIZE^2 causes an integer overflow error.
   * Enable `NUM_SERVOS` and set to `1`, enable `DEACTIVATE_SERVOS_AFTER_MOVE`
   * Enable `EEPROM_SETTINGS` to save changes to configuration on the machine
@@ -50,16 +55,13 @@ Following the instructions at <https://www.marginallyclever.com/2021/10/friday-f
     * Set `EXTRUDERS` to `0` because we aren't making a 3D printer
     * `#define POLARGRAPH`, which requires that you also `#define CLASSIC_JERK`
     * Set travel limits:
-       `#define X_MIN_POS (-X_BED_SIZE/2)`
-       `#define Y_MIN_POS (-Y_BED_SIZE/2)`
+       `#define X_MIN_POS (-X_BED_SIZE/2.0)`
+       `#define Y_MIN_POS (-Y_BED_SIZE/2.0)`
        `#define Z_MIN_POS 0`
-       `#define X_MAX_POS (X_BED_SIZE/2)`
-       `#define Y_MAX_POS (Y_BED_SIZE/2)`
+       `#define X_MAX_POS (X_BED_SIZE/2.0)`
+       `#define Y_MAX_POS (Y_BED_SIZE/2.0)`
        `#define Z_MAX_POS 0`
     * Disable `MIN_SOFTWARE_ENDSTOPS`
-    * Enable `BED_CENTER_AT_0_0`
-    * Set `MANUAL_X_HOME_POS` to `0`
-    * `MANUAL_Y_HOME_POS` was set above based on belt length and bed width
 
 
 * [Marlin/Configuration_adv.h](./Marlin/Configuration_adv.h):
@@ -71,7 +73,7 @@ Following the instructions at <https://www.marginallyclever.com/2021/10/friday-f
 
 ### Building the software
 
-Install the PlatformIO extension. To build the firmware, select the PlatformIO icon on the left panel. Under _PROJECT TASKS > Defaut > General_, click _Build All_. If there are no errors, proceed to load the firmware. 
+Install the PlatformIO extension. To build the firmware, select the PlatformIO icon on the left panel. Under _PROJECT TASKS > Default > General_, click _Build All_. If there are no errors, proceed to load the firmware. 
 
 The firmware should be located in `./.pio/build/at90usb1286_dfu/firmware.hex`. 
 
