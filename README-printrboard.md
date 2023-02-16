@@ -9,9 +9,9 @@ This personal fork is to keep track of the configuration for my machine, which i
 The board, motors, limit switches, and power supply are from an old Printrbot simple wooden kit:
  * [Printrboard rev. D](https://reprap.org/wiki/Printrboard)
  * Kysan 1124090 (old Z axis and extruder motors)
+ * 12V 6A power supply ("Model: LY1206")
  * [Limit switches](https://www.digikey.com/en/products/detail/omron-electronics-inc-emc-div/SS-01GLP/664737
 ) wired normally-closed
- * 12V 6A power supply ("Model: LY1206")
 
 Other hardware:
  * [Generic hobby servo](https://www.sparkfun.com/products/9065) labeled "9g A0090"
@@ -19,6 +19,12 @@ Other hardware:
  * Pen gondola
  * Belt/chain, pulleys, counterweights
  * Work surface
+
+While the limit switches work fine, I am using Hall effect sensors and permanent magnets for end stops instead: 
+ * A3144 Hall effect non-latching sensor
+ * neodymium ("rare earth") magnets attached to the counterweights
+
+With the sensor facing you (the chamfered side with the labeling), the pins are VCC, ground, and signal. With the edge of the board facing you (and the USB port on the left), the printrboard endstop headers pins are ground, VCC, and signal. 
 
 ### Configuration
 
@@ -54,14 +60,22 @@ Following the instructions at <https://www.marginallyclever.com/2021/10/friday-f
     * Set `CUSTOM_MACHINE_NAME` to `"Polargraph"`
     * Set `EXTRUDERS` to `0` because we aren't making a 3D printer
     * `#define POLARGRAPH`, which requires that you also `#define CLASSIC_JERK`
-    * Set travel limits:
-       `#define X_MIN_POS (-X_BED_SIZE/2.0)`
-       `#define Y_MIN_POS (-Y_BED_SIZE/2.0)`
-       `#define Z_MIN_POS 0`
-       `#define X_MAX_POS (X_BED_SIZE/2.0)`
-       `#define Y_MAX_POS (Y_BED_SIZE/2.0)`
-       `#define Z_MAX_POS 0`
+  * Set travel limits:
+    `#define X_MIN_POS (-X_BED_SIZE/2.0)`
+    `#define Y_MIN_POS (-Y_BED_SIZE/2.0)`
+    `#define Z_MIN_POS 0`
+    `#define X_MAX_POS (X_BED_SIZE/2.0)`
+    `#define Y_MAX_POS (Y_BED_SIZE/2.0)`
+    `#define Z_MAX_POS 0`
+  Set up end stops:
     * Disable `MIN_SOFTWARE_ENDSTOPS`
+    * `#define ENDSTOPPULLUPS`
+    * For physical normally-closed (NC) limit switch wiring connected to endstop ground and signal pins:  
+      `#define X_MAX_ENDSTOP_INVERTING false`
+      `#define Y_MAX_ENDSTOP_INVERTING false`
+    * For Hall effect sensors:  
+      `#define X_MAX_ENDSTOP_INVERTING true`
+      `#define Y_MAX_ENDSTOP_INVERTING true`
 
 
 * [Marlin/Configuration_adv.h](./Marlin/Configuration_adv.h):
