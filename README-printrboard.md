@@ -20,11 +20,11 @@ Other hardware:
  * Belt/chain, pulleys, counterweights
  * Work surface
 
-While the limit switches work fine, I am using Hall effect sensors and permanent magnets for end stops instead: 
+While the limit switches work fine, I am using Hall effect sensors and permanent magnets for endstops instead: 
  * A3144 Hall effect non-latching sensor
  * neodymium ("rare earth") magnets attached to the counterweights
 
-With the sensor facing you (the chamfered side with the labeling), the pins are VCC, ground, and signal. With the edge of the board facing you (and the USB port on the left), the printrboard endstop headers pins are ground, VCC, and signal. 
+With the sensor facing you (the chamfered side with the labeling), the pins are VCC, ground, and signal. With the edge of the board facing you (and the USB port on the left), the printrboard endstop headers pins are ground, VCC, and signal. The setup relies on having a pull-up resistor enabled on the input pin. You'll also need to test to determine the correct magnet orientation. 
 
 ### Configuration
 
