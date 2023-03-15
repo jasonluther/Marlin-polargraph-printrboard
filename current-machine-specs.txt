@@ -1,14 +1,15 @@
 Enter distance between belt pivot points: 594.118
 Enter optional pulley diameter adjustment: 
 Machine width: 594.118 mm
-X min/max: -297.059 - 297.059Enter belt length from pivot point to pen point: 32 3/8 in
-Belt length: 822.3249999999999 mm
-Calculated drawing area height: 766.7948592315938 mm
-Y min/max: -383.3974296157969 - 383.3974296157969
+X min/max: -297.059 - 297.059
+Enter belt length from pivot point to pen point: 30 3/8 in
+Belt length: 771.525 mm
+Calculated drawing area height: 712.0440830061015 mm
+Y min/max: -356.02204150305073 - 356.02204150305073
 {
   "MANUAL_X_HOME_POS": 0,
-  "MANUAL_Y_HOME_POS": -383.3974296157969,
-  "POLARGRAPH_MAX_BELT_LEN": 822.3249999999999,
+  "MANUAL_Y_HOME_POS": -356.02204150305073,
+  "POLARGRAPH_MAX_BELT_LEN": 771.525,
   "X_BED_SIZE": 594.118,
-  "Y_BED_SIZE": 766.7948592315938
+  "Y_BED_SIZE": 712.0440830061015
 }
